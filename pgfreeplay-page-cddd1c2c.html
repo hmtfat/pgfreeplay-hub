@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pg模拟器 · 信息索引与资料整理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f2e9;
+            color: #2c2b26;
+            font-family: 'Georgia', 'Times New Roman', 'Songti SC', 'Noto Serif SC', serif;
+            line-height: 1.7;
+            padding: 0 1.5rem;
+            min-height: 100vh;
+        }
+
+        .page {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 2.5rem 0 4rem 0;
+        }
+
+        /* header + 导航 */
+        .top-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid #d6cdbc;
+            padding-bottom: 0.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .site-title {
+            font-weight: 400;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            color: #4c3f30;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a {
+            color: #6b5a48;
+            text-decoration: none;
+            border-bottom: 1px dotted #b7a58c;
+            transition: border-color 0.2s;
+        }
+
+        .nav-links a:hover {
+            border-bottom-color: #2c2b26;
+            color: #2c2b26;
+        }
+
+        /* hero 区 */
+        .hero {
+            background: #ede4d5;
+            padding: 2.5rem 2rem;
+            border-radius: 20px 20px 8px 8px;
+            margin-bottom: 2.8rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            color: #3a3229;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #4e4439;
+            max-width: 620px;
+        }
+
+        .hero .intro-link {
+            display: inline-block;
+            margin-top: 1.4rem;
+            background: #dacfbc;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #2c2b26;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .hero .intro-link:hover {
+            background: #c8b99f;
+        }
+
+        /* 引用 / 提示框 */
+        .inset-box {
+            background: #f0e8de;
+            border-left: 5px solid #b7a386;
+            padding: 1.5rem 2rem;
+            margin: 2.5rem 0;
+            border-radius: 0 10px 10px 0;
+            font-size: 0.95rem;
+        }
+
+        .inset-box strong {
+            color: #4c3a28;
+        }
+
+        /* 通用标题 */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px dashed #d6cbbe;
+            padding-bottom: 0.3rem;
+            color: #3d342b;
+        }
+
+        /* 场景卡片 —— 三栏灵活布局 */
+        .scene-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin: 2rem 0 2.5rem 0;
+        }
+
+        .scene-card {
+            background: #faf5ee;
+            flex: 1 1 200px;
+            padding: 1.6rem 1.4rem;
+            border-radius: 14px;
+            border: 1px solid #e2d6c7;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            transition: box-shadow 0.2s;
+        }
+
+        .scene-card:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.04);
+        }
+
+        .scene-card h3 {
+            font-weight: 400;
+            font-size: 1.2rem;
+            color: #4f4132;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.01em;
+        }
+
+        .scene-card p {
+            font-size: 0.95rem;
+            color: #53493e;
+        }
+
+        .scene-card .tag {
+            display: inline-block;
+            background: #dacfc0;
+            padding: 0.1rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #2c2b26;
+            margin-top: 0.8rem;
+        }
+
+        /* FAQ 摘要 */
+        .faq-list {
+            margin: 2rem 0 2.5rem 0;
+        }
+
+        .faq-item {
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #e0d5c6;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: #453c30;
+            margin-bottom: 0.3rem;
+        }
+
+        .faq-a {
+            color: #5a5044;
+            font-size: 0.95rem;
+        }
+
+        .faq-a a {
+            color: #6b5a48;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #c6b59b;
+        }
+
+        .faq-a a:hover {
+            text-decoration-color: #2c2b26;
+            color: #2c2b26;
+        }
+
+        /* 脚注 */
+        .footnote {
+            margin-top: 3.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #d6cdbc;
+            font-size: 0.85rem;
+            color: #746a5c;
+            text-align: center;
+        }
+
+        /* 响应式 */
+        @media (max-width: 580px) {
+            body {
+                padding: 0 1rem;
+            }
+            .top-nav {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            .scene-card {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 顶部导航 -->
+    <header class="top-nav">
+        <span class="site-title">资料·pg模拟器</span>
+        <div class="nav-links">
+            <a href="#intro">介绍</a>
+            <a href="#scenes">场景</a>
+            <a href="#faq">说明</a>
+        </div>
+    </header>
+
+    <!-- hero 区（核心介绍） -->
+    <div class="hero" id="intro">
+        <h1>pg模拟器 · 信息索引</h1>
+        <p>这里整理了一份围绕 pg模拟器的轻量资料页，侧重于功能场景与常见疑问的梳理。如果你正在寻找一个可以直接使用的环境，可以从 <a href="https://pgfreeplay.com" style="background: transparent; padding:0; border-bottom:1px dotted #9b8a74; text-decoration:none; color:#3d342b;">pg模拟器</a> 了解其提供的功能及访问方式。</p>
+        <a href="https://pgfreeplay.com" class="intro-link">pg模拟器</a>
+    </div>
+
+    <!-- 三个场景模块 -->
+    <h2 class="section-title" id="scenes">常见使用场景</h2>
+    <div class="scene-grid">
+        <div class="scene-card">
+            <h3>参数与机制测试</h3>
+            <p>在不涉及实际投入的环境下，对特定模式或数值进行初步验证。适合快速了解不同设定下的表现差异。</p>
+            <span class="tag">模拟环境</span>
+        </div>
+        <div class="scene-card">
+            <h3>流程与操作熟悉</h3>
+            <p>通过界面交互与反馈循环，提前掌握基本流程与操作逻辑，减少生疏感。适合新接触某一系统的用户。</p>
+            <span class="tag">操作预习</span>
+        </div>
+        <div class="scene-card">
+            <h3>策略预演与记录</h3>
+            <p>借助模拟器提供的重复条件，尝试不同选择并记录结果，辅助形成自己的判断框架。</p>
+            <span class="tag">策略整理</span>
+        </div>
+    </div>
+
+    <!-- 引用 / 提示框 -->
+    <div class="inset-box">
+        <strong>📌 关于资料整理</strong><br>
+        本页内容均来自公开信息和用户自行整理，pg模拟器 本身是一个独立工具，请根据自身需求合理使用。如需直接访问，可前往 <a href="https://pgfreeplay.com" style="color:#3d342b; text-decoration: underline; text-underline-offset: 4px;">pg模拟器</a> 了解详情。
+    </div>
+
+    <!-- 常见说明（FAQ 摘要） -->
+    <h2 class="section-title" id="faq">常见说明</h2>
+    <div class="faq-list">
+        <div class="faq-item">
+            <div class="faq-q">pg模拟器 需要下载安装吗？</div>
+            <div class="faq-a">通常为在线使用，无需本地安装。具体入口与操作方式建议参考 <a href="https://pgfreeplay.com">pg模拟器</a> 的说明文档。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">模拟数据与实际环境是否一致？</div>
+            <div class="faq-a">模拟器内数据基于预设模型生成，可用作趋势参考，但与真实环境可能因变量不同而存在偏差。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">使用模拟器需要注册或付费吗？</div>
+            <div class="faq-a">绝大多数基础功能免费开放，部分高级选项可能需登录或订阅，以 pg模拟器 页面公示为准。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">遇到问题或反馈意见怎么办？</div>
+            <div class="faq-a">可通过网站提供的联系方式或社区渠道提交，维护团队会根据情况回复。当前页仅作资料索引，不直接处理反馈。</div>
+        </div>
+    </div>
+
+    <!-- 脚注 -->
+    <div class="footnote">
+        <span>pg模拟器 资料整理 · 信息索引页</span>
+    </div>
+
+</div>
+</body>
+</html>
